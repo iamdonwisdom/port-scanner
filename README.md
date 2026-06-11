@@ -12,3 +12,7 @@ A simple Python port scanner that detects open TCP ports on a target host.
 
 ```bash
 python3 port_scanner.py
+
+Author 
+
+Ede chidozie Philip 
