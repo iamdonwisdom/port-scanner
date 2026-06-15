@@ -1,5 +1,7 @@
 # Port Scanner
 
+Python-based network port scanner for identifying open ports and learning network reconnaissance.
+
 A simple Python port scanner that detects open TCP ports on a target host.
 
 # Features
