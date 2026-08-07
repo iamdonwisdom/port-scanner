@@ -1,33 +1,36 @@
-import socket
+from scanner import start_scan
 
-# Common ports and services
-services = {
-    21: "FTP",
-    22: "SSH",
-    23: "TELNET",
-    25: "SMTP",
-    53: "DNS",
-    80: "HTTP",
-    110: "POP3",
-    143: "IMAP",
-    443: "HTTPS"
-}
 
-target = input("Enter target IP or domain: ")
+def main():
+    print("=" * 60)
+    print("        PYTHON PORT SCANNER v2.0")
+    print("=" * 60)
 
-print(f"\nScanning {target}...\n")
+    target = input("\nEnter Target IP or Domain: ")
 
-for port in range(1, 1025):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.settimeout(0.5)
+    print("\nChoose Scan Mode")
+    print("1. Quick Scan (Top 30 Common Ports)")
+    print("2. Full Scan (1 - 65535)")
+    print("3. Custom Port Range")
 
-    result = s.connect_ex((target, port))
+    choice = input("\nEnter Choice: ")
 
-    if result == 0:
-        service = services.get(port, "Unknown")
-        print(f"[+] Port {port} is OPEN ({service})")
+    if choice == "1":
+        start_scan(target, mode="quick")
 
-    s.close()
+    elif choice == "2":
+        start_scan(target, mode="full")
 
-print("\nScan completed.")
+    elif choice == "3":
+        start_port = int(input("Starting Port: "))
+        end_port = int(input("Ending Port: "))
+        start_scan(target, mode="custom",
+                   start_port=start_port,
+                   end_port=end_port)
 
+    else:
+        print("Invalid option selected.")
+
+
+if __name__ == "__main__":
+    main()
